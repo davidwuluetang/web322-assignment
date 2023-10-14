@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lego Collection</title>
+        <link rel="stylesheet" href="/css/main.css"/>
+    </head>
+    <body tabIndex="-1">
+        
+        <div class="navbar bg-base-100">
+            <div class="flex-1">
+              <a href="/" class="btn btn-ghost normal-case text-xl">Lego Collection</a>
+            </div>
+
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost sm:hidden">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                  </svg>
+                </label>
+                <ul tabindex="0" class="menu menu-sm dropdown-content right-0 mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                  <li><a href="/about">About</a></li>
+                  <li>
+                    <details>
+                      <summary>
+                        Theme
+                      </summary>
+                      <ul class="p-2 bg-base-100">
+                        <li><a href="/lego/sets?theme=Town">Town</a></li>
+                        <li><a href="/lego/sets?theme=Basic Set">Basic Set</a></li>
+                        <li><a href="/lego/sets?theme=Supplemental">Supplemental</a></li>
+                      </ul>
+                    </details>
+                  </li>
+                </ul>
+            </div>
+
+            <div class="navbar-center hidden sm:flex">
+              <ul class="menu menu-horizontal px-1">
+                <li><a href="/about">About</a></li>
+                <li>
+                  <details>
+                    <summary>Theme</summary>
+                    <ul class="p-2 bg-base-200 right-0">
+                      <li><a href="/lego/sets?theme=Town">Town</a></li>
+                      <li><a href="/lego/sets?theme=Basic Set">Basic Set</a></li>
+                      <li><a href="/lego/sets?theme=Supplemental">Supplemental</a></li>
+                    </ul>
+                  </details>
+                </li>
+              </ul>
+            </div>
+        </div>
+        
+        <div class="container mx-auto">
+            <div class="hero rounded-lg bg-base-300 p-6">
+                <div class="hero-content text-center">
+                  <div class="max-w-md">
+                    <h1 class="text-5xl font-bold">Unleash Your Creativity</h1>
+                    <p class="py-6">We are official Lego distributor sice 1978. You can find the most comprehensive Lego collection in here. For more detail, check out all the logo collection we have here.</p>
+                    <button onclick="window.location.href='/lego/sets'" class="btn btn-primary">Check Lego Set</button>
+                  </div>
+                </div>
+            </div>
+            <br>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div>
+                    <div class="card bg-blue-100 shadow-xl">
+                        <figure>
+                          <img class="w-full" src="https://cdn.rebrickable.com/media/sets/10016-1.jpg" alt="Tanker" />
+                        </figure>
+                        <div class="card-body">
+                          <h2 class="card-title">Tanker</h2>
+                          <p>Released in 2001. Also appear in Large Classic Train Kit</p>
+                          <div class="card-actions justify-end">
+                            <button onclick="window.location.href='/lego/sets/10016-1'" class="btn btn-primary">View</button>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card bg-blue-100 shadow-xl">
+                        <figure>
+                          <img class="w-full" src="https://cdn.rebrickable.com/media/sets/10017-1.jpg" alt="Hopper Wagon" />
+                        </figure>
+                        <div class="card-body">
+                          <h2 class="card-title">Hopper Wagon</h2>
+                          <p>Released in 2001. Also appear in Classic Freight Train</p>
+                          <div class="card-actions justify-end">
+                            <button onclick="window.location.href='/lego/sets/10017-1'" class="btn btn-primary">View</button>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card bg-blue-100 shadow-xl">
+                        <figure>
+                          <img class="w-full" src="https://cdn.rebrickable.com/media/sets/1062-1.jpg" alt="Town Vehicles" />
+                        </figure>
+                        <div class="card-body">
+                          <h2 class="card-title">Town Vehicles</h2>
+                          <p>Released in 1980. Also appear in Road Safety Kit</p>
+                          <div class="card-actions justify-end">
+                            <button onclick="window.location.href='/lego/sets/1062-1'" class="btn btn-primary">View</button>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </body>
+</html>
