@@ -8,7 +8,7 @@
 *
 * Name: David Wulue Tang Student ID: 150276228 Date: October 15, 2023
 *
-* Published URL: ___________________________________________________________
+* Published URL: https://charming-plum-scarf.cyclic.app
 *
 ********************************************************************************/
 const legoData = require('./modules/legoSets')
