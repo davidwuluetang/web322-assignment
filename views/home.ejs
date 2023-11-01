@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lego Collection</title>
+        <link rel="stylesheet" href="/css/main.css"/>
+    </head>
+    <body tabIndex="-1">
+      <%- include('partials/navbar', {page: '/home'}) %>
+
+        <div class="container mx-auto">
+            <div class="hero rounded-lg bg-base-300 p-6">
+                <div class="hero-content text-center">
+                  <div class="max-w-md">
+                    <h1 class="text-5xl font-bold">Unleash Your Creativity</h1>
+                    <p class="py-6">We are official Lego distributor sice 1978. You can find the most comprehensive Lego collection in here. For more detail, check out all the logo collection we have here.</p>
+                    <button onclick="window.location.href='/lego/sets'" class="btn btn-primary">Check Lego Set</button>
+                  </div>
+                </div>
+            </div>
+            <br>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div>
+                    <div class="card bg-blue-100 shadow-xl">
+                        <figure>
+                          <img class="w-full" src="https://cdn.rebrickable.com/media/sets/10016-1.jpg" alt="Tanker" />
+                        </figure>
+                        <div class="card-body">
+                          <h2 class="card-title">Tanker</h2>
+                          <p>Released in 2001. Also appear in Large Classic Train Kit</p>
+                          <div class="card-actions justify-end">
+                            <button onclick="window.location.href='/lego/sets/10016-1'" class="btn btn-primary">View</button>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card bg-blue-100 shadow-xl">
+                        <figure>
+                          <img class="w-full" src="https://cdn.rebrickable.com/media/sets/10017-1.jpg" alt="Hopper Wagon" />
+                        </figure>
+                        <div class="card-body">
+                          <h2 class="card-title">Hopper Wagon</h2>
+                          <p>Released in 2001. Also appear in Classic Freight Train</p>
+                          <div class="card-actions justify-end">
+                            <button onclick="window.location.href='/lego/sets/10017-1'" class="btn btn-primary">View</button>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card bg-blue-100 shadow-xl">
+                        <figure>
+                          <img class="w-full" src="https://cdn.rebrickable.com/media/sets/1062-1.jpg" alt="Town Vehicles" />
+                        </figure>
+                        <div class="card-body">
+                          <h2 class="card-title">Town Vehicles</h2>
+                          <p>Released in 1980. Also appear in Road Safety Kit</p>
+                          <div class="card-actions justify-end">
+                            <button onclick="window.location.href='/lego/sets/1062-1'" class="btn btn-primary">View</button>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </body>
+</html>

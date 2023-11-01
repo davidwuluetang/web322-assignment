@@ -1,5 +1,5 @@
 module.exports = {
-  content: [`./views/*.html`],
+  content: [`./views/**/*.ejs`],
   daisyui: {
     themes: ['retro'],
   },

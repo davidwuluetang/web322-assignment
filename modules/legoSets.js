@@ -35,7 +35,7 @@ function getSetByNum(setNum) {
 }
 
 function getSetsByTheme(theme) {
-    let foundSets = sets.filter(set => set.theme.toLowerCase().includes(theme.toLowerCase()));
+    let foundSets = sets.filter(set => set.theme.toLowerCase() === theme.toLowerCase());
     return new Promise((resolve, reject) => {
         if(foundSets.length !== 0) resolve(foundSets);
         else reject(`No match on requested theme: "${theme}"`);
