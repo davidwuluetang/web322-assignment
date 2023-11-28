@@ -1,33 +1,63 @@
 /********************************************************************************
-* WEB322 – Assignment 05
+* WEB322 – Assignment 06
 *
 * I declare that this assignment is my own work in accordance with Seneca's
 * Academic Integrity Policy:
 *
 * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
 *
-* Name: David Wulue Tang Student ID: 150276228 Date: November 17, 2023
+* Name: David Wulue Tang Student ID: 150276228 Date: November 28, 2023
 *
 * Published URL: https://charming-plum-scarf.cyclic.app/
 *
 ********************************************************************************/
-const legoData = require('./modules/legoSets')
+const legoData = require('./modules/legoSets');
+const authData = require('./modules/auth-service');
 const express = require('express');
+const clientSessions = require('client-sessions');
 const app = express();
 const HTTP_PORT = process.env.PORT || 3000;
 
 async function load() {
-    try {
-        await legoData.initialize();
-    } catch (error) {
-        console.log(error);
-    }
+
+    legoData.initialize()
+    .then(authData.initialize)
+    .then(function(){
+        app.listen(HTTP_PORT, function(){
+            console.log(`app listening on:  ${HTTP_PORT}`);
+        });
+    }).catch(function(err){
+        console.log(`unable to start server: ${err}`);
+    });
+
     
     app.set('view engine', 'ejs');
     
     app.use(express.static('public'));
 
     app.use(express.urlencoded({ extended: true }));
+
+    app.use(
+        clientSessions({
+          cookieName: 'session',
+          secret: 'o6LjQ5EadfKJSVNC28ZgK64hadKSfadfDELM18ScpFQr',
+          duration: 5 * 60 * 1000,
+          activeDuration: 1000 * 60 * 3,
+        })
+    );
+
+    app.use((req, res, next) => {
+        res.locals.session = req.session;
+        next();
+    });
+    
+    function ensureLogin(req, res, next) {
+        if (!req.session.user) {
+          res.redirect('/login');
+        } else {
+          next();
+        }
+    }
 
     app.get('/', (req, res) => {
         res.render('home');
@@ -62,7 +92,7 @@ async function load() {
         }
     });
 
-    app.get('/lego/addSet', async (req, res) => {
+    app.get('/lego/addSet', ensureLogin, async (req, res) => {
         try {
             let themeData = await legoData.getAllThemes();
             res.render("addSet", { themes: themeData });
@@ -71,7 +101,7 @@ async function load() {
         }
     });
 
-    app.post('/lego/addSet', async (req, res) => {
+    app.post('/lego/addSet', ensureLogin, async (req, res) => {
         let setData = req.body;
         try {
             await legoData.addSet(setData);
@@ -81,7 +111,7 @@ async function load() {
         }
     });
 
-    app.get('/lego/editSet/:num', async (req, res) => {
+    app.get('/lego/editSet/:num', ensureLogin, async (req, res) => {
         try {
             let setData = await legoData.getSetByNum(req.params.num);
             let themeData = await legoData.getAllThemes();
@@ -91,7 +121,7 @@ async function load() {
         }
     });
 
-    app.post('/lego/editSet', async (req, res) => {
+    app.post('/lego/editSet', ensureLogin, async (req, res) => {
         try {
             await legoData.editSet(req.body.set_num, req.body);
             res.redirect('/lego/sets');
@@ -100,7 +130,7 @@ async function load() {
         }
     });
 
-    app.get('/lego/deleteSet/:num', async (req, res) => {
+    app.get('/lego/deleteSet/:num', ensureLogin, async (req, res) => {
         try {
             await legoData.deleteSet(req.params.num);
             res.redirect('/lego/sets');
@@ -109,11 +139,52 @@ async function load() {
         }
     });
 
+    app.get('/login', (req, res) => {
+        res.render('login');
+    });
+
+    app.get('/register', (req, res) => {
+        res.render('register');
+    });
+
+    app.post('/register', async (req, res) => {
+        try {
+            await authData.registerUser(req.body);
+            res.render('register', { successMessage: "User created" });
+        } catch (err) {
+            res.render('register', { errorMessage: err, userName: req.body.userName });
+        }
+    });
+
+    app.post('/login', async (req, res) => {
+        req.body.userAgent = req.get('User-Agent');
+
+        try {
+            let user = await authData.checkUser(req.body);
+            req.session.user = {
+                userName: user.userName,
+                email: user.email,
+                loginHistory: user.loginHistory
+            };
+            res.redirect('/lego/sets');
+        } catch (err) {
+            res.render('login', { errorMessage: err, userName: req.body.userName });
+        }
+    });
+
+    app.get('/logout', (req, res) => {
+        req.session.reset();
+        res.redirect('/');
+    });
+
+    app.get('/userHistory', ensureLogin, (req, res) => {
+        res.render('userHistory');
+    });
+
     app.use((req, res, next) => {
         res.status(404).render('404', {message: "I'm sorry, we're unable to find what you're looking for."});
     });
     
-    app.listen(HTTP_PORT, () => console.log(`server listening on: ${HTTP_PORT}`));
 }
 
 load();

@@ -50,7 +50,9 @@
                      <span id="quote"></span>
                      <br>
                      <br>
-                     <a class="btn btn-success btn-sm" href="/lego/editSet/<%= set.set_num %>">EDIT SET</a>
+                     <% if(session.user){ %> 
+                      <a class="btn btn-success btn-sm" href="/lego/editSet/<%= set.set_num %>">EDIT SET</a>
+                     <% } %>
                      <a class="btn btn-primary btn-sm" href="#" onclick="history.back(); return false;">RETURN</a>
                     </p>
                 </div>
