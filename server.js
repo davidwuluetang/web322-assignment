@@ -14,6 +14,7 @@
 const legoData = require('./modules/legoSets');
 const authData = require('./modules/auth-service');
 const express = require('express');
+const path = require('path');
 const clientSessions = require('client-sessions');
 const app = express();
 const HTTP_PORT = process.env.PORT || 3000;
@@ -32,6 +33,7 @@ async function load() {
 
     
     app.set('view engine', 'ejs');
+    app.set('views', path.join(__dirname, 'views'));
     
     app.use(express.static('public'));
 
