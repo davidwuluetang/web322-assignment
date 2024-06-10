@@ -34,8 +34,8 @@ async function load() {
     
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, 'views'));
-    
-    app.use(express.static('public'));
+
+    app.use("/css", express.static(__dirname + "/public/css"));
 
     app.use(express.urlencoded({ extended: true }));
 
